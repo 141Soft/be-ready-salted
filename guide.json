@@ -1,0 +1,26 @@
+{
+    "Details": {
+        "description": "Server providing data for the ready-salted app."
+    },
+    "GET /api": {
+        "description": "Serves up a json representation of all available endpoints"
+    },
+    "GET /api/users": {
+        "description": "Serves an array containing the details of all users, with password fields ommitted"
+    },
+    "GET /api/users/username": {
+        "description": "Serves a single user's details omitting password"
+    },
+    "GET /api/users/:username/password": {
+        "description": "Performs comparison between password on request body and password stored in corresponding document in users collection"
+    },
+    "POST /api/users": {
+        "description": "Accepts a json on request body and adds this as a new document on the users collection"
+    },
+    "DELETE /api/users/:username": {
+        "description": "Deletes a document from users collection with corresponding username"
+    },
+    "PATCH /api/users/:username": {
+        "description": "Updates fields on a document from users collection with the contents of the request body"
+    }
+}
