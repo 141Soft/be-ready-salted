@@ -47,6 +47,7 @@ app.get('/api/users/scores', (req, res) => {
 
     db.collection('users')
     .find()
+    .sort({ score: -1 })
     .project(defaultUserProject)
     .forEach(user => scoresArr.push(user))
     .then(() => {
