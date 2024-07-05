@@ -106,7 +106,6 @@ app.patch('/api/users/:username', (req, res) => {
     const userPatch = req.body;
     db.collection('users')
     .updateOne({username: req.params.username}, {$set: userPatch})
-    .project(defaultUserProject)
     .then((result) => {
         res.status(200).json(result);
     })
