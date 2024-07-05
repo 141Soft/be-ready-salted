@@ -14,6 +14,9 @@
     "GET /api/users/:username/password": {
         "description": "Performs comparison between password on request body and password stored in corresponding document in users collection"
     },
+    "GET /api/users/scores": {
+        "description": "Serves a list of all scores attached to documents in the user collection"
+    },
     "POST /api/users": {
         "description": "Accepts a json on request body and adds this as a new document on the users collection"
     },
