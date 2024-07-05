@@ -66,16 +66,14 @@ app.get('/api/users/:username', (req, res) => {
     })
 })
 
-app.get('/api/users/:username/password', (req, res) => {
+app.post('/api/users/:username/password', (req, res) => {
     const passwordToCheck = req.body.password;
-
     db.collection('users')
-    .findOne({username: req.params.username})
-    .project({password:1})
+    .findOne({username: req.params.username}, {projection: {password:1}})
     .then((user) => {
         user.password === passwordToCheck
         ? res.status(200).json({match: true})
-        : res.status(404).json({match: false})
+        : res.status(200).json({match: false})
     })
 })
 
