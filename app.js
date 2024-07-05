@@ -57,8 +57,7 @@ app.get('/api/users/scores', (req, res) => {
 
 app.get('/api/users/:username', (req, res) => {
     db.collection('users')
-    .findOne({username: req.params.username})
-    .project(defaultUserProject)
+    .findOne({username: req.params.username}, {projection: defaultUserProject})
     .then((user) => {
         res.status(200).json(user);
     })
