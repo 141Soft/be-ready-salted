@@ -6,6 +6,7 @@
         "description": "Serves up a json representation of all available endpoints"
     },
     "GET /api/users": {
+        "queries": "?p=num in order to navigate pagination of served users",
         "description": "Serves an array containing the details of all users, with password fields ommitted"
     },
     "GET /api/users/username": {
@@ -15,10 +16,11 @@
     "POST /api/users/:username/password": {
         "accepts": "username property to reference a document in users collection, password on request body in format {password:'your password here'}",
         "description": "Performs comparison between password on request body and password stored in corresponding document in users collection",
-        "notes": "Placeholder functionality, this should not be a POST request and has no safety for passwords at current"
+        "notes": "Password security implemented, still using POST request"
     },
     "GET /api/users/scores": {
-        "description": "Serves a list of all scores attached to documents in the user collection"
+        "queries": "?p=num in order to navigate pagination of served scores",
+        "description": "Serves a list of all scores in descending order attached to documents in the user collection"
     },
     "POST /api/users": {
         "accepts": "user details on request body, should contain username, email, password fields inside object",

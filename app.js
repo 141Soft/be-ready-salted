@@ -19,7 +19,6 @@ connectToDb((err) => {
     
 })
 
-// This defines the fields returned by most user queries, DO NOT add password to this until I figure out proper encryption and seperation
 const defaultUserProject = {username: 1, score: 1, email: 1}
 
 app.get('/api', (req, res) => {
@@ -31,9 +30,14 @@ app.get('/api', (req, res) => {
 
 app.get('/api/users', (req, res) => {
     const users = []
+    const page = req.query.p || 0;
+    const displayLimit = 10;
 
     db.collection('users')
     .find()
+    .sort({ username: 1 })
+    .skip(page * displayLimit)
+    .limit(displayLimit)
     .project(defaultUserProject)
     .forEach(user => users.push(user))
     .then(() => {
@@ -46,10 +50,14 @@ app.get('/api/users', (req, res) => {
 
 app.get('/api/users/scores', (req, res) => {
     const scoresArr = []
+    const page = req.query.p || 0;
+    const displayLimit = 5;
 
     db.collection('users')
     .find()
     .sort({ score: -1 })
+    .skip(page * displayLimit)
+    .limit(displayLimit)
     .project(defaultUserProject)
     .forEach(user => scoresArr.push(user))
     .then(() => {
