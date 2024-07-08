@@ -10,7 +10,7 @@
         "description": "Serves an array containing the details of all users, with password fields ommitted"
     },
     "GET /api/users/username/:username": {
-        "accepts": "username property to match with a document",
+        "accepts": "username property to match with a document.",
         "description": "Serves a single user's details, omitting password"
     },
     "GET /api/users/email/:email" : {
