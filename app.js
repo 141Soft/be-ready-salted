@@ -95,10 +95,11 @@ app.post('/api/users', (req, res) => {
     hashPassword(newUser.password, 10)
     .then((hash) => {
         newUser.password = hash;
+        newUser.score = 0;
     })
-
-    db.collection('users')
-    .insertOne(newUser)
+    .then(() => {
+        return db.collection('users').insertOne(newUser)
+    })
     .then((result) => {
         res.status(201).json(result)
     })
