@@ -65,9 +65,20 @@ app.get('/api/users/scores', (req, res) => {
     })
 })
 
-app.get('/api/users/:username', (req, res) => {
+app.get('/api/users/username/:username', (req, res) => {
     db.collection('users')
     .findOne({username: req.params.username}, {projection: defaultUserProject})
+    .then((user) => {
+        res.status(200).json(user);
+    })
+    .catch((err) => {
+        res.status(500).json({err: 'Could not retrieve user'})
+    })
+})
+
+app.get('/api/users/email/:email', (req, res) => {
+    db.collection('users')
+    .findOne({email: req.params.email}, {projection: defaultUserProject})
     .then((user) => {
         res.status(200).json(user);
     })
