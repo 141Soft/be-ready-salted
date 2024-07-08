@@ -1,6 +1,8 @@
-const express = require('express')
+const express = require('express');
 const fs = require('fs/promises');
-const { connectToDb, getDb } = require('./db')
+const { connectToDb, getDb } = require('./db');
+const hashPassword = require('./utils/hashPassword');
+const validatePassword = require('./utils/validatePassword');
 
 const app = express();
 app.use(express.json());
@@ -71,14 +73,22 @@ app.post('/api/users/:username/password', (req, res) => {
     db.collection('users')
     .findOne({username: req.params.username}, {projection: {password:1}})
     .then((user) => {
-        user.password === passwordToCheck
-        ? res.status(200).json({match: true})
-        : res.status(200).json({match: false})
+        return validatePassword(passwordToCheck, user.password);
+    })
+    .then((result) => {
+        result === true
+        ? res.status(200).send({match:true})
+        : res.status(200).send({match:false})
     })
 })
 
 app.post('/api/users', (req, res) => {
     const newUser = req.body;
+    hashPassword(newUser.password, 10)
+    .then((hash) => {
+        newUser.password = hash;
+    })
+
     db.collection('users')
     .insertOne(newUser)
     .then((result) => {
