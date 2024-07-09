@@ -1,11 +1,19 @@
 const { MongoClient } = require('mongodb')
+const ENV = process.env.NODE_ENV || 'development'
+require('dotenv').config({
+    path: `${__dirname}/.env.${ENV}`
+})
 
-const dbName = 'ready-salted';
+if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL not set')
+}
+
 let dbConnection;
+const uri = process.env.DATABASE_URL;
 
 module.exports = {
     connectToDb: (callback) => {
-        MongoClient.connect(`mongodb://localhost:27017/${dbName}`)
+        MongoClient.connect(uri)
         .then((client) => {
             dbConnection = client.db();
             return callback();
