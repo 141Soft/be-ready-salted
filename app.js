@@ -1,10 +1,12 @@
 const express = require('express');
 const fs = require('fs/promises');
+const cors = require('cors')
 const { connectToDb, getDb } = require('./db');
 const hashPassword = require('./utils/hashPassword');
 const validatePassword = require('./utils/validatePassword');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 let db;
