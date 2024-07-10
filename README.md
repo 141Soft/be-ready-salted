@@ -1,7 +1,7 @@
 # be-ready-salted
 
 ## ABOUT
-Back end server and database structure for the Ready-Salted game project, allowing the user to:
+Back end server and database structure for the Ready-Salted game project, found here: https://github.com/SixteenThousand/Ready-Salted-Front-End, allowing the user to:
 - Store user information for the Ready Salted game
 - Fetch information about users
 
