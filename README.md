@@ -18,3 +18,5 @@ To run this project locally follow these steps:
 
 ## Environment Variables
 For security the necessary .env files for the database will be omitted from this repo.
+## Acknowledgments
+This game is being made as a final portfolio piece for the Northcoders software development bootcamp (https://northcoders.com/our-courses/skills-bootcamp-in-software-development).
